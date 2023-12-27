@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze Explorer</title>
+    <link rel="icon" href="../Assets/Images/log03.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
          body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            font-family:myfont;
             color: #fff;
             background-size: cover;
             display: flex;
@@ -16,7 +17,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url("./Images/maze1.jpg");
+            background-image: url("../Assets/Images/maze1.jpg");
         }
 
         h1 {
@@ -54,7 +55,7 @@
             opacity: 1;
             background-size: cover;
             background-position: center;
-            background-image:url("./Images/maze3.jpg");
+            background-image:url("../Assets/Images/maze3.jpg");
         }
 
         .player {
@@ -134,53 +135,53 @@
         
         @font-face {
             font-family: myfont;
-            src: url("./Fonts/DragonHunter-9Ynxj.otf");
+            src: url("../Assets/Fonts/DragonHunter-9Ynxj.otf");
         }
         .name{
             font-family: myfont;
         }
         #celebration {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        }        
+        
+        .balloon,
+        .cracker {
+            width: 20px;
+            height: 20px;
+            background-color: #ffeb3b; 
+            border-radius: 50%;
+            margin: 5px;
+            animation: floatUp 3s ease-in-out infinite;
+        }         
+        
+        .cracker {
+            background-color: #e57373; 
+            animation: explode 1s ease-out forwards;
+            opacity: 0;
+        }        
+        
+        @key        frames floatUp {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }        
 
-.balloon,
-.cracker {
-    width: 20px;
-    height: 20px;
-    background-color: #ffeb3b; 
-    border-radius: 50%;
-    margin: 5px;
-    animation: floatUp 3s ease-in-out infinite;
-}
-
-.cracker {
-    background-color: #e57373; 
-    animation: explode 1s ease-out forwards;
-    opacity: 0;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-30px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-@keyframes explode {
-    to {
-        opacity: 1;
-        transform: scale(1.5);
-    }
-}
-button {
+        @keyframes explode {
+            to {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+        button {
                 text-decoration: none;
                 background-color: #2d98b9;
                 background-image: linear-gradient(90deg, #b7aa21 0%, #bc401e 100%); 
@@ -194,14 +195,14 @@ button {
                 position: relative;
                 overflow: hidden;
                 width: 150px; 
-    }
+        }
 
-    button:hover {
+        button:hover {
                 background-color: rgb(194, 94, 210);
                 transform: scale(1.1);
                 transition: transform 0.3s ease;
                 animation: fiery 0.5s infinite alternate;
-    }
+        }
 
 
             @keyframes fiery {
@@ -219,9 +220,27 @@ button {
         .coin {
             color: #ffeb3b;
         }
+        .goog-te-banner-frame {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        /* Optional: Adjust the close button style */
+        .goog-te-banner-frame.skiptranslate {
+            display: none;
+        }
+        .goog-te-gadget {
+            color: #671e1e; /
+        }
     </style>
 </head>
 <body>
+    <!-- Translate API -->
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <div id="google_translate_element"></div>
+
     <h1 class="name">MAZE EXPLORER</h1>
     <div id="timer">Timer: 0s</div>
     <div id="steps">Steps: 0</div>
@@ -231,7 +250,7 @@ button {
             <h1>Congratulations!</h1>
             <p id="modalMessage"></p>
             <button>
-                <a style="text-decoration: none;" href=".\Pages\MazeIntermediate.html">
+                <a style="text-decoration: none;" href="..\Pages\MazeIntermediate.html">
                     <span style="color: rgb(236, 237, 236);">Intermediate</span>
                 </a>
             </button>
@@ -241,10 +260,10 @@ button {
     <div id="coinsCollected">
         <!-- <i class="fas fa-coins"></i>--> Coins Collected: 0 
     <audio id="backgroundMusic" loop>
-        <source src="\Images\animal.mp3" type="audio/mpeg">
+        <source src="../Assets/Images/animal.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-    <a href=".\main\index.html" style="position: fixed; bottom: 10px; left: 10px;">
+    <a href="../index.html" style="position: fixed; bottom: 10px; left: 10px;">
         <i class="fas fa-house"></i>
     </a>
 
@@ -323,7 +342,7 @@ button {
                     coinsCollectedElement.textContent = `Coins Collected: ${coinsCollected}`;
     }
 
-    playerCell.innerHTML = '<i class="fas fa-rocket player"></i>';
+    playerCell.innerHTML = '<i class="fas fa-wheelchair player"></i>';
     destinationCell.innerHTML = '<i class="fas fa-trophy destination"></i>';
 }
 
@@ -444,9 +463,35 @@ button {
 
             // Trigger the celebration animation
             celebrate();
-        
-
-        
     </script>
+    <!-- Google translate API -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Add an ID to the element you want to translate
+          document.querySelector('.translatable').setAttribute('id', 'textToTranslate');
+    
+          // Listen for changes in the language dropdown
+          document.querySelector('#google_translate_element').addEventListener('change', function () {
+            const selectedLanguage = document.querySelector('.goog-te-combo').value;
+    
+            // Re-initialize Google Translate API
+            googleTranslateElementInit();
+    
+            setTimeout(() => {
+              // Get the original and translated text
+              const originalText = document.querySelector('#textToTranslate').textContent;
+              const translatedText = document.querySelector('.goog-te-banner-frame').textContent;
+    
+              // Display an alert 
+              alert(`Original: ${originalText}\nTranslated: ${translatedText}`);
+            }, 500);
+          });
+        });
+    
+        // Function to initialize Google Translate API
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+        </script>
 </body>
 </html>
